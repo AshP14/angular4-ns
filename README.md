@@ -11,11 +11,7 @@ npm install -g @angular/cli
 npm install
 ```
 
-### Running the application install the latest bootstrap
-
-```bash
-npm install --save bootstrap
-```
+### Running the application
 
 ```bash
 ng serve
