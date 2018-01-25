@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from './login.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   public email: any;
 
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService,
+              private router: Router) { }
 
   ngOnInit() {
     console.log('login component initialized');
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
             (response) => {
                 console.log(response);
                 // const csrfToken = xhr.getResponseHeader('netsense-csrf-token');
-                //   this._router.navigate(['/dashboard']);
+                  this.router.navigate(['/accounts']);
             },
             (error) => {
               console.log(error);
