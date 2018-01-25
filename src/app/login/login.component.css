@@ -1,6 +1,6 @@
 
 #netsense-login-screen {
-  height: 600px;
+  height: 800px;
   background-image: url("./../../assets/images/loginbackground.jpg");
   background-position: center;
   background-size: cover;
@@ -8,9 +8,18 @@
 }
 
 .ns-login{
-background: white;
-  height: 200px;
+  background: white;
+  height: 240px;
+  width: 620px;
+  position: relative;
+  top: 210px;
+}
+
+.login-header{
+  padding-top: 40px;
+  padding-left: 70px;
 }
 .ns-login-form{
-
+  width: 50%;
+  margin: 0 auto;
 }

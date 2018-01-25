@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginService} from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -13,24 +14,26 @@ export class LoginComponent implements OnInit {
   public email: any;
 
 
-  constructor() { }
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
     console.log('login component initialized');
   }
 
   login() {
-    console.log("login", this.user);
-
-    // this._accountService.login(this.user).subscribe((res: any) => {
-    //   //this._accountService.emitResponse(res);
-    //   this._router.navigate(['/dashboard']);
-    //
-    // },(error: any) => {
-    //   console.log(error);
-    //   this.status.code = 'error';
-    //   this.status.message = JSON.parse(error._body).message;
-    // });
+    console.log( 'user', this.user);
+    this.loginService.userLogin(this.user).subscribe(
+            (response) => {
+                console.log(response);
+                // const csrfToken = xhr.getResponseHeader('netsense-csrf-token');
+                //   this._router.navigate(['/dashboard']);
+            },
+            (error) => {
+              console.log(error);
+                  // this.status.code = 'error';
+                  // this.status.message = JSON.parse(error._body).message;
+            }
+    );
   }
 
 }

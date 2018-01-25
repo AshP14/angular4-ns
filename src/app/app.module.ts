@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import { HeaderComponent } from './header/header.component';
+import {LoginService} from './login/login.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { HeaderComponent } from './header/header.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
