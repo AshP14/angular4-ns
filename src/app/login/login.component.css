@@ -85,3 +85,7 @@ input:focus{
   float: right;
   margin-top: 19px
 }
+.errMessage{
+  color: red;;
+  font-size: 17px;
+}

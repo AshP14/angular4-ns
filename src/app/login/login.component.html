@@ -11,14 +11,15 @@
              src="https://www.verizon.com/cs/groups/public/documents/adacct/vzlogo_lg.png">
 
         <div class="ns-login-form">
-          <form id="ns-login-form" (ngSubmit)="login()">
+          <form id="ns-login-form" (ngSubmit)="login()" >
+          <p *ngIf="validationError" class="errMessage" >please enter valid username and password</p>
             <div class="ns-email">
               <label class="ns-login-label" for="username">Email Address</label>
-              <input class="ns-login-input" type="text" placeholder="Enter email address" name="username" [(ngModel)]="user.email"  id="username" required />
+              <input class="ns-login-input" type="text" placeholder="Enter email address" name="username" [(ngModel)]="user.email"  id="username" required required type="email" />
             </div>
             <div class="ns-password">
               <label class="ns-login-label" for="password">Password</label>
-              <input class="ns-login-input" type="password" placeholder="Enter Password" name="password" [(ngModel)]="user.password" id="password" required />
+              <input class="ns-login-input" type="password" placeholder="Enter Password" name="password" [(ngModel)]="user.password" id="password" required required pattern=".{2,}" type="password" />
             </div>
             <input class="btn btn-primary ns-login-button" type="submit" value="Log in"/>
           </form>

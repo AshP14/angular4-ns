@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from './login.service';
 import {Router} from '@angular/router';
+import {FormsModule} from '@angular/forms'
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit {
   public status: any = {};
   public user: any = {};
   public email: any;
+  public validationError: boolean = false;
 
 
   constructor(private loginService: LoginService,
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit {
             },
             (error) => {
               console.log(error);
+              this.validationError = true;
                   // this.status.code = 'error';
                   // this.status.message = JSON.parse(error._body).message;
             }
