@@ -12,6 +12,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccountsComponent } from './accounts/accounts.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { TranslateModule } from '@ngx-translate/core';
+import {AccountsService} from './accounts/accounts.service';
 
 const appRoutes: Routes = [
     { path: '', component: LoginComponent },
@@ -49,7 +50,7 @@ const appRoutes: Routes = [
       TranslateModule.forRoot(),
       AngularSlickgridModule
   ],
-  providers: [LoginService],
+  providers: [LoginService, AccountsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

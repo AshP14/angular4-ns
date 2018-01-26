@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Column, GridOption } from 'angular-slickgrid';
+import {AccountsService} from './accounts.service';
 
 @Component({
   selector: 'app-accounts',
@@ -12,53 +13,88 @@ export class AccountsComponent implements OnInit {
     gridOptions: GridOption;
     dataset: any[];
 
-    constructor() { }
+    public customers: any;
+    public partners: any;
+    constructor(private accountService: AccountsService) { }
 
     ngOnInit() {
-
         this.columnDefinitions = [
-            { id: 'title', name: 'Title', field: 'title', sortable: true },
-            { id: 'duration', name: 'Duration (days)', field: 'duration', sortable: true },
-            { id: '%', name: '% Complete', field: 'percentComplete', sortable: true },
-            { id: 'start', name: 'Start', field: 'start' },
-            { id: 'finish', name: 'Finish', field: 'finish' },
-            { id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven', sortable: true }
+            {id: 'name', name: 'Name', field: 'name', sortable: true},
+            {id: 'type', name: 'Type', field: 'type',  sortable: true},
+            {id: 'partnername', name: 'Partner Name', field: 'partnername', sortable: true},
+            {id: 'city', name: 'City', field: 'city',   sortable: true },
+            {id: 'state', name: 'State', field: 'state',   sortable: true},
+            {id: 'orgid', name: 'Sites', field: 'orgid',  sortable: true }
         ];
         this.gridOptions = {
             enableAutoResize: true,       // true by default
-            enableCellNavigation: true
+            enableCellNavigation: true,
+            enableHeaderMenu: true,
+            enableFiltering: true
         };
 
-        // fill the dataset with your data
-        // VERY IMPORTANT, Angular-Slickgrid uses Slickgrid DataView which
-        // REQUIRES a unique "id" and it has to be lowercase "id" and be part of the dataset
-        this.dataset = [];
-
-        // for demo purpose, let's mock a 1000 lines of data
-        for (let i = 0; i < 1000; i++) {
-            const randomYear = 2000 + Math.floor(Math.random() * 10);
-            const randomMonth = Math.floor(Math.random() * 11);
-            const randomDay = Math.floor((Math.random() * 28));
-            const randomPercent = Math.round(Math.random() * 100);
-
-            this.dataset[i] = {
-                id: i, // again VERY IMPORTANT to fill the "id" with unique values
-                title: 'Task ' + i,
-                duration: Math.round(Math.random() * 100) + '',
-                percentComplete: randomPercent,
-                start: `${randomMonth}/${randomDay}/${randomYear}`,
-                finish: `${randomMonth}/${randomDay}/${randomYear}`,
-                effortDriven: (i % 5 === 0)
-            };
-        }
+        this.accountService.getAllCustomers().subscribe(
+            (response) => {
+                console.log(response);
+                this.customers = response.json();
+                console.log(this.customers);
 
 
-
-
+                this.passGridData(this.customers);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
 
     }
 
+    _onlyPartners(customers) {
+        var customersLength = customers.length;
+        var partners = [];
+        for (var i = 0; i < customers.length; i++) {
+            if (customers[i].type === 'partner' || customers[i].name ==='Sensity Systems') {
+                partners.push(customers[i]);
+            }
+        }
+        return partners;
+    },
 
 
+    addPartner(customers) {
+        this.partners = this._onlyPartners(customers);
+        for (let i = 0; i < this.partners.length; i++) {
+            for(let c = 0; c < customers.length; c++) {
+               if(customers[c].po === this.partners[i].orgid) {
+                   customers[c].partnername = this.partners[i].name;
+                   customers[c].type = 'customer';
+               }
+            }
+        }
+        return customers;
+    },
 
+    passGridData(customers) {
+        // fill the dataset with your data
+        // VERY IMPORTANT, Angular-Slickgrid uses Slickgrid DataView which REQUIRES a unique "id" and it has to be lowercase "id" and be part of the dataset
+
+        let updatedCustomers = this.addPartner(this.customers);
+        console.log(updatedCustomers);
+
+
+        this.dataset = [];
+        let length = updatedCustomers.length;
+
+        for (let i = 0; i < length; i++) {
+            this.dataset[i] = {
+                id: i, // again VERY IMPORTANT to fill the "id" with unique values
+                name: updatedCustomers[i].name,
+                type: updatedCustomers[i].type,
+                partnername:  updatedCustomers[i].partnername,
+                city: updatedCustomers[i].city,
+                state: updatedCustomers[i].state,
+                sites: updatedCustomers[i].orgid
+            };
+        }
+    }
 }

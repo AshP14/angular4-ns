@@ -27,8 +27,10 @@ export class LoginComponent implements OnInit {
     this.loginService.userLogin(this.user).subscribe(
             (response) => {
                 console.log(response);
-                // const csrfToken = xhr.getResponseHeader('netsense-csrf-token');
-                  this.router.navigate(['/accounts']);
+                let csrfToken = response.headers.getAll('netsense-csrf-token');
+                console.log(csrfToken);
+                localStorage.setItem('csrfToken', csrfToken[0]);
+                this.router.navigate(['/accounts']);
             },
             (error) => {
               console.log(error);
