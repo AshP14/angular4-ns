@@ -58,7 +58,7 @@ export class AccountsComponent implements OnInit {
             }
         }
         return partners;
-    },
+    }
 
 
     addPartner(customers) {
@@ -72,7 +72,7 @@ export class AccountsComponent implements OnInit {
             }
         }
         return customers;
-    },
+    }
 
     passGridData(customers) {
         // fill the dataset with your data
