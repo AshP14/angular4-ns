@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginService} from './login.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,24 +15,29 @@ export class LoginComponent implements OnInit {
   public email: any;
 
 
-  constructor() { }
+  constructor(private loginService: LoginService,
+              private router: Router) { }
 
   ngOnInit() {
     console.log('login component initialized');
   }
 
   login() {
-    console.log("login", this.user);
-
-    // this._accountService.login(this.user).subscribe((res: any) => {
-    //   //this._accountService.emitResponse(res);
-    //   this._router.navigate(['/dashboard']);
-    //
-    // },(error: any) => {
-    //   console.log(error);
-    //   this.status.code = 'error';
-    //   this.status.message = JSON.parse(error._body).message;
-    // });
+    console.log( 'user', this.user);
+    this.loginService.userLogin(this.user).subscribe(
+            (response) => {
+                console.log(response);
+                let csrfToken = response.headers.getAll('netsense-csrf-token');
+                console.log(csrfToken);
+                localStorage.setItem('csrfToken', csrfToken[0]);
+                this.router.navigate(['/accounts']);
+            },
+            (error) => {
+              console.log(error);
+                  // this.status.code = 'error';
+                  // this.status.message = JSON.parse(error._body).message;
+            }
+    );
   }
 
 }

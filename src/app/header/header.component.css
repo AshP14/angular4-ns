@@ -1,0 +1,56 @@
+.ns-header-app{
+    color: #000;
+}
+
+.ns-header-nav{
+    height: 100px;
+}
+
+.ns-header-routes{
+    margin-left: 21px;
+    margin-top: 26px;
+    color: #000;
+}
+.ns-header-routes>li>a{
+    color: #000;
+    font-weight: 900;
+    font-size: 16px;
+    font-family: NHaasGroteskDSW01-75Bd,lato,helvetica,arial,san-serif;
+}
+
+.ns-header-routes>li>a:hover{
+    color: #d52B1E;
+}
+
+#ns-account-logo{
+    height: 39px;
+
+}
+
+.ns-header-span{
+    color: #000;
+    font-weight: 900;
+    font-size: 16px;
+    font-family: NHaasGroteskDSW01-75Bd,lato,helvetica,arial,san-serif;
+    position: relative;
+    left: 305px;
+    top: 29px;
+}
+#ns-search{
+    height: 39px;
+    padding: 0 12px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    line-height: 1.78571;
+    border-width: 0px;
+    letter-spacing: 0.5px;
+    border-radius: 0 !important;
+    left: 310px;
+    position: relative;
+    top: 30px;
+}
+
+.ns-mgmt{
+    border-bottom: 1px solid #d52B1E;
+    border-width:medium;
+}
