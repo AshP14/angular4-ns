@@ -58,7 +58,7 @@ export class AccountsComponent implements OnInit {
             }
         }
         return partners;
-    },
+    }
 
 
     addPartner(customers) {
@@ -72,7 +72,7 @@ export class AccountsComponent implements OnInit {
             }
         }
         return customers;
-    },
+    }
 
     passGridData(customers) {
         // fill the dataset with your data
@@ -90,6 +90,7 @@ export class AccountsComponent implements OnInit {
                 id: i, // again VERY IMPORTANT to fill the "id" with unique values
                 name: updatedCustomers[i].name,
                 type: updatedCustomers[i].type,
+
                 partnername:  updatedCustomers[i].partnername,
                 city: updatedCustomers[i].city,
                 state: updatedCustomers[i].state,
