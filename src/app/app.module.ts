@@ -8,6 +8,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { LoginService } from './login/login.service';
+import { LogoutService } from './header/logout.service';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountsComponent } from './accounts/accounts.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -50,7 +51,7 @@ const appRoutes: Routes = [
       TranslateModule.forRoot(),
       AngularSlickgridModule
   ],
-  providers: [LoginService, AccountsService],
+  providers: [LoginService, AccountsService, LogoutService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
